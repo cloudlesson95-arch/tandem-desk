@@ -9,7 +9,7 @@ from agent.guards import Topic, check_input, refusal_for
 
 PROMPTS = [
     ("How much is the late fee if I bring an e-bike back two hours late?", Topic.policy_question),
-    ("Do I need a helmet to ride a tandem?", Topic.policy_question),
+    ("Which desk do I usually use, and when does it open?", Topic.policy_question),
     ("What happens to my deposit if I pay with a debit card?", Topic.policy_question),
     ("Can you extend rental R-2001 by two days?", Topic.account_action),
     ("Please cancel my booking R-2002.", Topic.account_action),

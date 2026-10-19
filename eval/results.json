@@ -1,0 +1,4 @@
+{
+  "placeholder": true,
+  "note": "Run `uv run python eval/run.py` to produce the evaluation results."
+}

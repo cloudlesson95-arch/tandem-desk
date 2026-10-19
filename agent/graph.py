@@ -21,6 +21,7 @@ from agent import approval, memory, tools
 from agent.guards import Topic, check_input, refusal_for
 from agent.llm import agent_llm
 from agent.pii import redact
+from agent.verifier import FALLBACK, verify
 
 MAX_RETRIES = 3  # rephrased searches after the first one
 MAX_ACCOUNT_STEPS = 4
@@ -341,9 +342,14 @@ async def human_approval(state: State, db: AsyncConnection):
 
 @traced("verifier")
 async def verifier(state: State, db: AsyncConnection):
-    # Phase 4 replaces this pass-through with the claim-level fact check.
-    answer = state["draft"]
-    return {"answer": answer, "status": "answered", "messages": [AIMessage(answer)]}, {"checked": False}
+    draft = state["draft"]
+    if not state.get("verify", True):
+        update = {"answer": draft, "status": "answered", "messages": [AIMessage(draft)]}
+        return update, {"checked": False, "skipped": "verifier off for this run"}
+    result = await verify(draft, state.get("evidence") or [])
+    answer, status = (FALLBACK, "blocked") if result["blocked"] else (draft, "answered")
+    update = {"answer": answer, "status": status, "verification": result, "messages": [AIMessage(answer)]}
+    return update, {"checked": True, **result}
 
 
 @traced("memory_writer")

@@ -13,6 +13,8 @@ from agent.pii import redact
 MAX_FACTS = 3
 DUPLICATE_SCORE = 0.92
 PLACEHOLDER = re.compile(r"\[[A-Z]+_\d+\]")
+# One-off details that are not durable preferences: rental ids, dates, prices.
+ONE_OFF = re.compile(r"\bR-\d{4}\b|\b\d{4}-\d{2}-\d{2}\b|\$\d")
 
 MEMORY_PROMPT = """You keep long-term notes about a customer of Velomarsh, a fictional bike-rental service.
 From the latest exchange, extract at most 3 durable facts worth remembering in future conversations:
@@ -77,7 +79,7 @@ async def write(
             f"Customer: {message}\nAssistant: {answer}"
         ),
     ])
-    facts = [f for f in (_clean(p) for p in update.preferences[:MAX_FACTS]) if f]
+    facts = [f for f in (_clean(p) for p in update.preferences[:MAX_FACTS]) if f and not ONE_OFF.search(f)]
     facts = [f for f in facts if f.lower() not in {k.lower() for k in known}]
     summary = _clean(update.summary)
     texts = facts + ([summary] if summary else [])

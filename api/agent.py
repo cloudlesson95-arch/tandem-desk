@@ -1,14 +1,18 @@
 """FastAPI app served as a Vercel Python function and, locally, by uvicorn on :8000."""
 import asyncio
+import hashlib
+import json
 import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
+import groq  # noqa: E402
 import psycopg  # noqa: E402
-from fastapi import FastAPI, HTTPException  # noqa: E402
+from fastapi import FastAPI, HTTPException, Request  # noqa: E402
 from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver  # noqa: E402
 from langgraph.types import Command  # noqa: E402
 from psycopg.rows import dict_row  # noqa: E402
@@ -21,6 +25,11 @@ from agent.seed import reset_demo  # noqa: E402
 
 app = FastAPI(title="Tandem Desk agent API")
 BUILDER = build_graph()
+
+# Demo guard: keeps public visitors from using up the free model quotas.
+HOURLY_PER_IP = 20
+DAILY_TOTAL = 200
+EXAMPLE = ROOT / "data" / "example_conversation.json"
 
 CustomerId = Field(pattern=r"^C-\d{4}$")
 ThreadId = Field(min_length=8, max_length=64, pattern=r"^[A-Za-z0-9-]+$")
@@ -100,16 +109,60 @@ async def health() -> dict:
     return {"ok": True, "keys": keys_present()}
 
 
+def _client_ip(request: Request) -> str:
+    # Vercel overwrites X-Forwarded-For with the real client address.
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.headers.get("x-real-ip") or (request.client.host if request.client else "unknown")
+
+
+async def _over_limit(conn: psycopg.AsyncConnection, ip: str) -> str | None:
+    """Count this message per IP per hour and overall per day; IPs are stored hashed."""
+    ip_key = "ip:" + hashlib.sha256(ip.encode()).hexdigest()[:16]
+    cur = await conn.execute(
+        "INSERT INTO rate_limits (key, window_start, count) VALUES"
+        " (%s, date_trunc('hour', now()), 1), ('all', date_trunc('day', now()), 1)"
+        " ON CONFLICT (key, window_start) DO UPDATE SET count = rate_limits.count + 1"
+        " RETURNING key, count",
+        (ip_key,),
+    )
+    counts = {r["key"]: r["count"] for r in await cur.fetchall()}
+    if counts[ip_key] > HOURLY_PER_IP:
+        return f"more than {HOURLY_PER_IP} messages from this address in the last hour"
+    if counts["all"] > DAILY_TOTAL:
+        return f"the demo reached its limit of {DAILY_TOTAL} messages today"
+    return None
+
+
+def _cached(reason: str) -> dict:
+    """A recorded real conversation, returned instead of a live answer."""
+    return {
+        "thread_id": None, "status": "cached", "cached": True, "reason": reason,
+        "answer": f"Live answers are paused ({reason}). Here is a recorded conversation instead.",
+        "example": json.loads(EXAMPLE.read_text(encoding="utf-8")),
+        "pending_action": None, "trace": [], "redactions": [], "evidence": [],
+    }
+
+
 @app.post("/api/agent/chat")
-async def chat(req: ChatIn) -> dict:
+async def chat(req: ChatIn, request: Request) -> dict:
+    if not keys_present():
+        return _cached("an API key is missing on the server")
     async with session() as (graph, conn):
+        reason = await _over_limit(conn, _client_ip(request))
+        if reason:
+            return _cached(reason)
         snap = await _snapshot(graph, req.thread_id, req.customer_id)
         ctx = Ctx(db=conn)
-        if snap.interrupts:
-            # A new message while an action waits for approval rejects that action.
-            await graph.ainvoke(Command(resume={"decision": "reject"}), _config(req.thread_id), context=ctx)
-        inp = turn_input(req.customer_id, req.thread_id, req.message, req.verify, req.memory)
-        await graph.ainvoke(inp, _config(req.thread_id), context=ctx)
+        try:
+            if snap.interrupts:
+                # A new message while an action waits for approval rejects that action.
+                await graph.ainvoke(Command(resume={"decision": "reject"}), _config(req.thread_id), context=ctx)
+            inp = turn_input(req.customer_id, req.thread_id, req.message, req.verify, req.memory)
+            await graph.ainvoke(inp, _config(req.thread_id), context=ctx)
+        except groq.RateLimitError:
+            return _cached("the model provider's free rate limit was reached")
         return _response(await graph.aget_state(_config(req.thread_id)), req.thread_id)
 
 
