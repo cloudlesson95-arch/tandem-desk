@@ -1,0 +1,15 @@
+START-HERE.md
+PLAN.md
+CLAUDE.md
+.env
+.env.*
+.venv
+.next
+node_modules
+__pycache__
+.pytest_cache
+eval/cache
+# Vercel installs the Python function from requirements.txt (runtime dependencies only);
+# without these two files it cannot fall back to the uv project with its dev group.
+pyproject.toml
+uv.lock

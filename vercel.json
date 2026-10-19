@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/agent.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{eval/**,data/policies/**,tests/**,scripts/**,db/**,app/**,lib/**,public/**,node_modules/**,.next/**}"
+    }
+  },
+  "rewrites": [{ "source": "/api/agent/(.*)", "destination": "/api/agent" }]
+}
