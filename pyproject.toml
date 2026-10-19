@@ -28,3 +28,8 @@ dev = [
     "transformers>=5.20.1",
     "uvicorn>=0.54.0",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = ["online: calls the Groq API (skip offline with -m 'not online')"]

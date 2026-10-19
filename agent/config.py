@@ -13,8 +13,11 @@ try:
 except ImportError:
     pass
 
-AGENT_MODEL = os.getenv("AGENT_MODEL", "llama-3.3-70b-versatile")
-GUARD_MODEL = os.getenv("GUARD_MODEL", "llama-3.1-8b-instant")
+# Open-weight models served by Groq. Groq no longer lists Llama 3.x chat models, so the
+# agents use gpt-oss; Meta's Llama Prompt Guard 2 scores prompt injection.
+AGENT_MODEL = os.getenv("AGENT_MODEL", "openai/gpt-oss-120b")
+GUARD_MODEL = os.getenv("GUARD_MODEL", "openai/gpt-oss-20b")
+INJECTION_MODEL = os.getenv("INJECTION_MODEL", "meta-llama/llama-prompt-guard-2-86m")
 EMBED_MODEL = "models/gemini-embedding-001"
 EMBED_DIM = 768
 
