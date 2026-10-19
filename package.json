@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "api": "uv run uvicorn api.agent:app --port 8000 --loop asyncio:SelectorEventLoop"
   },
   "dependencies": {
     "next": "16.4.2",
