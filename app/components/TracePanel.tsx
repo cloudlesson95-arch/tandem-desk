@@ -1,6 +1,6 @@
 "use client";
 
-import type { TraceEntry } from "@/lib/types";
+import type { Claim, TraceEntry } from "@/lib/types";
 
 type Step = {
   thought?: string | null;
@@ -60,7 +60,7 @@ function NodeDetails({ entry }: { entry: TraceEntry }) {
   const e = entry as Record<string, unknown>;
   const guard = e.guard as Record<string, unknown> | undefined;
   const redactions = e.redactions as { type: string; placeholder: string; preview: string }[] | undefined;
-  const claims = e.claims as { claim: string; supported: boolean; evidence_id: string | null; reason: string | null }[] | undefined;
+  const claims = e.claims as Claim[] | undefined;
   const stored = e.stored as { kind: string; content: string }[] | undefined;
   return (
     <div className="space-y-0.5">
@@ -79,11 +79,15 @@ function NodeDetails({ entry }: { entry: TraceEntry }) {
         </Row>
       )}
       {typeof e.route === "string" && <Row label="route">{e.route}</Row>}
+      {(Array.isArray(e.model) ? e.model.length > 0 : typeof e.model === "string") && (
+        <Row label="model">{fmt(e.model)}</Row>
+      )}
       {Array.isArray(e.recalled) && (
         <Row label="recalled">{e.recalled.length ? e.recalled.join(" · ") : "no memories"}</Row>
       )}
       {Array.isArray(e.steps) && <Steps steps={e.steps as Step[]} />}
       {typeof e.paused === "string" && <Row label="paused">{e.paused}</Row>}
+      {typeof e.handoff === "string" && <Row label="handoff">general policy question → {e.handoff}</Row>}
       {typeof e.decision === "string" && (
         <Row label="decision">
           {e.decision} · token {e.token_valid ? "valid" : "invalid"}
@@ -95,7 +99,10 @@ function NodeDetails({ entry }: { entry: TraceEntry }) {
           {claims.map((c, i) => (
             <Row key={i} label={c.supported ? "✓ claim" : "✗ claim"}>
               <span className={c.supported ? "" : "text-rose-600"}>
-                {c.claim} {c.evidence_id && <code>[{c.evidence_id}]</code>}
+                {c.claim}{" "}
+                {(c.evidence_ids ?? (c.evidence_id ? [c.evidence_id] : [])).map((id) => (
+                  <code key={id}>[{id}]</code>
+                ))}
                 {c.reason && ` (${c.reason})`}
               </span>
             </Row>

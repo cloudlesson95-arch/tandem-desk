@@ -19,7 +19,7 @@ from pydantic import ValidationError
 
 from agent import approval, memory, tools
 from agent.guards import Topic, check_input, refusal_for
-from agent.llm import agent_llm
+from agent.llm import agent_call
 from agent.pii import redact
 from agent.verifier import FALLBACK, verify
 
@@ -30,11 +30,13 @@ RESET = {"reset": True}
 # gpt-oss sometimes cites in its native style, e.g. 【P1】 or 【P1†L2-L4】, and writes
 # narrow no-break spaces and non-breaking hyphens.
 NATIVE_CITATION = re.compile(r"【\s*([PMA]\d+)[^】]*】")
+SPACED_CITATION = re.compile(r"\[\s+([PMA]\d+)\s*\]|\[([PMA]\d+)\s+\]")
 TYPOGRAPHY = str.maketrans({" ": " ", " ": " ", " ": " ", "‑": "-"})
 
 
 def normalize_citations(text: str) -> str:
-    return NATIVE_CITATION.sub(r"[\1]", text.translate(TYPOGRAPHY))
+    text = NATIVE_CITATION.sub(r"[\1]", text.translate(TYPOGRAPHY))
+    return SPACED_CITATION.sub(lambda m: f"[{m.group(1) or m.group(2)}]", text)
 
 
 def add_trace(old: list | None, new: list | None) -> list:
@@ -163,25 +165,25 @@ Answer the customer's question using only policy passages returned by the search
 3. Then answer in at most 120 words. After each fact, cite its passage id in square brackets, e.g. [P2].
    Notes about the customer can be cited as [M1] etc.
 If the passages don't answer the question, say the policies don't cover it and suggest asking a desk.
-Never guess or use outside knowledge. Placeholders like [EMAIL_1] stand for redacted personal data."""
+Never guess or use outside knowledge. Placeholders like [EMAIL_1] stand for redacted personal data:
+don't comment on them or on requests to use them (sending, storing, refunding); answer only the policy question."""
 
 
 @traced("knowledge_agent")
 async def knowledge_agent(state: State, db: AsyncConnection):
     search_tool = tools.spec("search_policies", tools.SearchPolicies)
-    llm = agent_llm().bind_tools([search_tool])
-    must_answer = agent_llm().bind_tools([search_tool], tool_choice="none")
     messages: list[AnyMessage] = [
         SystemMessage(KNOWLEDGE_PROMPT), *_memory_note(state), *_history(state),
         HumanMessage(state["message"]),
     ]
     passages: dict[str, dict] = {}  # chunk id -> passage with its turn-local id P1, P2, ...
-    steps, searches, draft = [], 0, ""
+    steps, searches, draft, models = [], 0, "", set()
     max_steps = MAX_RETRIES + 3
     for step_no in range(max_steps):
         # After the first search plus MAX_RETRIES rephrasings the model must answer.
-        forced = searches > MAX_RETRIES or step_no == max_steps - 1
-        reply = await (must_answer if forced else llm).ainvoke(messages)
+        choice = "none" if searches > MAX_RETRIES or step_no == max_steps - 1 else None
+        reply, model = await agent_call(lambda m: m.bind_tools([search_tool], tool_choice=choice), messages)
+        models.add(model)
         thought = _short(reply.additional_kwargs.get("reasoning_content"))
         if not reply.tool_calls:
             draft = str(reply.content).strip()
@@ -221,7 +223,7 @@ async def knowledge_agent(state: State, db: AsyncConnection):
         "I couldn't find that in our policies. A desk can help with this question."
     )
     evidence = [*passages.values(), *_memory_evidence(state)]
-    return {"draft": draft, "evidence": evidence}, {"steps": steps, "searches": searches}
+    return {"draft": draft, "evidence": evidence}, {"steps": steps, "searches": searches, "model": sorted(models)}
 
 
 ACCOUNT_PROMPT = """You are the account agent of the support desk for Velomarsh, a fictional bike-rental service.
@@ -231,24 +233,28 @@ You help the current customer with their own rentals, using only the tools get_r
   Use exactly the rental and number of days the customer asked for.
 - If a tool reports a rule violation, explain it briefly and don't retry with other values.
 - If it is unclear which rental the customer means, ask a short question.
+- If the customer asks how a policy works in general (fees, rules, how extensions or cancellations
+  work) rather than about one of their rentals, reply with exactly POLICY_QUESTION and nothing else;
+  the knowledge agent, which has the policy documents, will answer.
 - Reply in at most 80 words and state only facts from tool results.
 Today is {today}."""
+HANDOFF = "POLICY_QUESTION"
 
 
 @traced("account_agent")
 async def account_agent(state: State, db: AsyncConnection):
     cid = state["customer_id"]
     specs = [tools.spec(name, model) for name, model in tools.ACCOUNT_TOOLS.items()]
-    llm = agent_llm().bind_tools(specs)
     messages: list[AnyMessage] = [
         SystemMessage(ACCOUNT_PROMPT.format(today=date.today().isoformat())), *_memory_note(state),
         *_history(state), HumanMessage(state["message"]),
     ]
     last_lookup = list(state.get("last_lookup") or [])
     rentals: dict[str, dict] = {}
-    steps, draft = [], ""
+    steps, draft, models = [], "", set()
     for _ in range(MAX_ACCOUNT_STEPS):
-        reply = await llm.ainvoke(messages)
+        reply, model = await agent_call(lambda m: m.bind_tools(specs), messages)
+        models.add(model)
         thought = _short(reply.additional_kwargs.get("reasoning_content"))
         if not reply.tool_calls:
             draft = str(reply.content).strip()
@@ -297,7 +303,7 @@ async def account_agent(state: State, db: AsyncConnection):
                     return {
                         "pending_action": pending, "last_lookup": last_lookup, "answer": answer,
                         "status": "pending", "messages": [AIMessage(answer)],
-                    }, {"steps": steps, "paused": "waiting for approval"}
+                    }, {"steps": steps, "paused": "waiting for approval", "model": sorted(models)}
             steps.append(step)
             messages.append(ToolMessage(observation, tool_call_id=call["id"]))
     evidence = [
@@ -306,10 +312,17 @@ async def account_agent(state: State, db: AsyncConnection):
                     f"{r['end_date']}, ${r['daily_rate']:.2f} per day"}
         for i, r in enumerate(rentals.values())
     ] + _memory_evidence(state)
+    if HANDOFF in draft:
+        # A general policy question: the account agent has no policy evidence to answer from.
+        return {"route": "knowledge_agent", "last_lookup": last_lookup}, {
+            "steps": steps, "handoff": "knowledge_agent", "model": sorted(models),
+        }
     draft = normalize_citations(draft) or (
         "Sorry, I couldn't complete that. Could you say which rental you mean?"
     )
-    return {"draft": draft, "evidence": evidence, "last_lookup": last_lookup}, {"steps": steps}
+    return {"draft": draft, "evidence": evidence, "last_lookup": last_lookup}, {
+        "steps": steps, "model": sorted(models),
+    }
 
 
 @traced("human_approval")
@@ -362,6 +375,12 @@ async def memory_writer(state: State, db: AsyncConnection):
     return {}, {"stored": stored}
 
 
+def after_account(state: State) -> str:
+    if state.get("pending_action"):
+        return "human_approval"
+    return "knowledge_agent" if state.get("route") == "knowledge_agent" else "verifier"
+
+
 def build_graph() -> StateGraph:
     g = StateGraph(State, context_schema=Ctx)
     for node in (input_guard, supervisor, knowledge_agent, account_agent, human_approval,
@@ -372,10 +391,7 @@ def build_graph() -> StateGraph:
                             ["supervisor", END])
     g.add_conditional_edges("supervisor", lambda s: s["route"], ["knowledge_agent", "account_agent"])
     g.add_edge("knowledge_agent", "verifier")
-    g.add_conditional_edges(
-        "account_agent", lambda s: "human_approval" if s.get("pending_action") else "verifier",
-        ["human_approval", "verifier"],
-    )
+    g.add_conditional_edges("account_agent", after_account, ["human_approval", "knowledge_agent", "verifier"])
     g.add_edge("human_approval", "memory_writer")
     g.add_edge("verifier", "memory_writer")
     g.add_edge("memory_writer", END)

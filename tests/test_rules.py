@@ -60,3 +60,4 @@ def test_trace_resets_each_turn():
 
 def test_native_citations_normalized():
     assert normalize_citations("Open 8:00【P1】 and 9:00【P2†L3-L4】.") == "Open 8:00[P1] and 9:00[P2]."
+    assert normalize_citations("Free helmet [ P3 ] and lock [P4 ].") == "Free helmet [P3] and lock [P4]."

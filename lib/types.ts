@@ -24,7 +24,8 @@ export type PendingAction = {
 export type Claim = {
   claim: string;
   supported: boolean;
-  evidence_id: string | null;
+  evidence_ids?: string[];
+  evidence_id?: string | null; // single-id form in older recordings
   reason: string | null;
 };
 

@@ -26,6 +26,8 @@ type Results = {
   ragas?: { faithfulness: number; answer_relevancy: number; context_precision: number; n: number; judge?: string };
   categories?: Category[];
   failure?: { title: string; found: string; trace: string; fix: string; before?: string; after?: string };
+  nli_calibration?: { supported_accepted: number; supported_total: number; errors_caught: number; errors_total: number };
+  pre_fix_ids?: string[];
 };
 
 const results = raw as Results;
@@ -94,7 +96,22 @@ export default function EvalPage() {
           {Math.abs(delta).toFixed(1)} points · share of answered questions with any unsupported sentence ({h.answered_on}{" "}
           answered with the verifier on, {h.answered_off} with it off)
         </div>
+        {results.nli_calibration && (
+          <div className="mt-3 text-xs text-zinc-500">
+            How far to trust it: on a hand-labelled check, the NLI scorer ({results.models?.nli}) accepts{" "}
+            {results.nli_calibration.supported_accepted} of {results.nli_calibration.supported_total} supported claims
+            and catches {results.nli_calibration.errors_caught} of {results.nli_calibration.errors_total} planted false
+            claims, so the rate is a strict, approximate measure.
+          </div>
+        )}
       </section>
+
+      {results.pre_fix_ids && results.pre_fix_ids.length > 0 && (
+        <p className="rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+          {results.pre_fix_ids.length} answers ({results.pre_fix_ids.join(", ")}) are from before the last agent fix: the
+          model provider&apos;s daily token quota ran out before they could be rerun.
+        </p>
+      )}
 
       <section className="grid gap-4 sm:grid-cols-3">
         <Tile

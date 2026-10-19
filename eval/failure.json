@@ -1,0 +1,8 @@
+{
+  "title": "general policy questions routed to the account agent were answered without evidence",
+  "found": "In the first full run, 3 of the 4 questions the guard labelled as account actions were general policy questions (\"Can I cancel a rental that has already started?\", \"How can I extend my current bike rental?\", \"When is an extension officially confirmed?\"), and the verifier blocked all 3. Questions carrying personal data were blocked 3 times in 10, against 3 in 60 for the same kind of question without it.",
+  "trace": "The trace showed input_guard → supervisor → account_agent with no tool call, and the agent's thought \"Likely when customer approves in app. Use knowledge. No tool needed.\": the account agent, which has no policy search tool, answered from the model's own knowledge, and the verifier found no evidence for its claims. In a PII question, the knowledge agent added an uncited remark about the redacted address (\"We can't forward any details to the address you provided\"), which blocked an otherwise correct answer.",
+  "fix": "The account agent now hands general policy questions to the knowledge agent (it replies POLICY_QUESTION and the graph routes the turn there), the topic classifier labels \"how does X work\" questions as policy questions, and the knowledge agent no longer comments on redacted placeholders.",
+  "before": "the 7 rerun questions: 5 answered, 2 blocked; account-routed policy questions answered from the model's own knowledge",
+  "after": "the 7 rerun questions: all 7 answered; ans-004 is now routed to the knowledge agent and cites the cancellation policy, pii-002 is handed off by the account agent and cites the booking-transfer rule, and ans-008 asks which rental to extend instead of guessing"
+}

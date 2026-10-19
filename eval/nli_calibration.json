@@ -1,0 +1,653 @@
+{
+ "note": "Hand-labelled claims for checking the NLI scorer: answer sentences the passages support (supported=true) and planted false claims (supported=false), with the passages retrieved for that question.",
+ "cases": [
+  {
+   "question_id": "ans-036",
+   "claim": "Renting a city bike for a full 24-hour day costs **$18** per day[P1].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Pricing\n## Daily rates\n\n| Bike | Price per day |\n|---|---|\n| City bike | $18 |\n| Hybrid bike | $24 |\n| Road bike | $28 |\n| City e-bike | $32 |\n| Mountain bike | $35 |\n| Cargo bike | $40 |\n| Tandem bike | $45 |\n| Kids bike | $12 |\n\nA rental day is 24 hours from the pickup time. Every rental includes a lock, a helmet and a front and rear light set at no extra cost."
+    },
+    {
+     "pid": "P2",
+     "content": "# Pricing\n## Hourly rentals\n\nCity bikes can be rented for $6 per hour and city e-bikes for $10 per hour, with a minimum of 2 hours. An hourly rental of 4 hours or more is charged as one full day. Other bike types are rented by the day only.\n\n## Multi-day discounts\n\nRentals of 7 days or more get 15% off the daily rate. Rentals of 14 days or more get 25% off. Discounts do not stack with each other, but they do stack with the Plus membership discount."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pricing\n\nVelomarsh Bike Rental is a fictional bike-rental service. All prices are in US dollars and exclude 8% sales tax, which is added at checkout."
+    },
+    {
+     "pid": "P4",
+     "content": "# Tandem bikes and group bookings\n\n## Tandem bikes\n\nA tandem bike costs $45 per day and needs a $300 deposit. The front rider (captain) must be at least 16. The rear rider (stoker) can be 10 or older when the captain is their parent or guardian."
+    },
+    {
+     "pid": "P5",
+     "content": "# Kids bikes, child seats and trailers\n\n## Kids bikes\n\nKids bikes cost $12 per day and fit children aged 5 to 12. Child helmets are free.\n\n## Child seats\n\nRear child seats fit children from 9 months to 4 years old who weigh up to 22 kg. A child seat costs $5 per day and can be fitted to city and hybrid bikes only."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-039",
+   "claim": "Cargo bikes may carry up to 80 kg in the front box according to Velomarsh's load limits [P1].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Riding rules\n\n## On the road\n\nRiders must follow local traffic laws, ride on roads and bike paths rather than sidewalks, and use the provided lights between dusk and dawn.\n\n## Loads\n\nCargo bikes carry up to 80 kg in the front box. Other bikes may carry up to 10 kg in the rear rack. Passengers are allowed only on tandems and in approved child seats or trailers."
+    },
+    {
+     "pid": "P2",
+     "content": "# Breakdown assistance\n\n## Roadside hotline\n\nThe roadside assistance hotline is open from 7:00 to 21:00 every day. Plus members are served first.\n\n## Replacement bikes\n\nWithin 15 km of a desk, Velomarsh brings a replacement bike within 60 minutes. The replacement is free when the breakdown is caused by a mechanical fault. When the rider caused the damage, the damage policy applies."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pickup and return\n\n## Desks and opening hours\n\nVelomarsh has three desks:\n\n- Harbour Desk: 8:00 to 20:00 every day\n- Central Station Desk: 8:00 to 20:00 every day\n- Riverside Park Desk: 9:00 to 18:00 every day\n\n## Returning to another desk\n\nBikes can be returned to any desk at no extra cost. One-way returns between desks are free."
+    },
+    {
+     "pid": "P4",
+     "content": "# Breakdown assistance\n## Flat tyres\n\nEvery bike carries a puncture repair kit and a pump, and customers may fix a flat themselves. Flat tyres are never charged.\n\n## Outside the service area\n\nMore than 15 km from a desk, the customer brings the bike to the nearest desk, and Velomarsh refunds a taxi or rideshare fare up to $30 when the breakdown was a mechanical fault."
+    },
+    {
+     "pid": "P5",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-049",
+   "claim": "Riders must be at least 18 years old to rent and ride an e-bike [ P1 ].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Age and identification\n\n## Minimum ages\n\n- Riders must be at least 16 to rent a bike on their own.\n- Riders must be at least 18 to rent an e-bike.\n- Riders under 16 can ride when a parent or guardian rents the bike and signs the rental agreement.\n- Kids bikes are sized for ages 5 to 12."
+    },
+    {
+     "pid": "P2",
+     "content": "# E-bikes\n## Rules\n\nE-bike riders must be at least 18 and must wear a helmet. City e-bikes are for paved roads and bike paths only; they must not be ridden on unpaved trails."
+    },
+    {
+     "pid": "P3",
+     "content": "# Age and identification\n## Identification\n\nThe person picking up the bike must show a government-issued photo ID. The name on the ID must match the name on the booking. A booking can be transferred to another adult at the desk if both people are present."
+    },
+    {
+     "pid": "P4",
+     "content": "# E-bikes\n\n## Performance\n\nCity e-bikes have pedal assist up to 25 km/h and a range of 60 to 80 km on a full battery, depending on terrain and assist level. Batteries are fully charged at pickup.\n\n## Charging and battery swaps\n\nA charger is included with e-bike rentals of 2 days or more. Customers can swap a low battery for a charged one at any desk for free. Returning a bike with an empty battery is not charged."
+    },
+    {
+     "pid": "P5",
+     "content": "# Tandem bikes and group bookings\n\n## Tandem bikes\n\nA tandem bike costs $45 per day and needs a $300 deposit. The front rider (captain) must be at least 16. The rear rider (stoker) can be 10 or older when the captain is their parent or guardian."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-027",
+   "claim": "The hold on a credit-card security deposit is released within 3 business days after the bike is returned and inspected [P1].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Security deposits\n## Release of the deposit\n\nAfter the bike is returned and inspected, the hold is released within 3 business days for credit cards. Holds on debit cards can take up to 10 business days to disappear, depending on the customer's bank.\n\n## When the deposit is used\n\nThe deposit covers unpaid late fees, damage charges, cleaning fees and lost accessories. Any amount taken from the deposit is itemised in an email sent on the day of return inspection."
+    },
+    {
+     "pid": "P2",
+     "content": "# Security deposits\n\n## Deposit amounts\n\nA security deposit is held on the customer's card at pickup:\n\n- $100 for city, hybrid, road, mountain and kids bikes\n- $250 for city e-bikes and cargo bikes\n- $300 for tandem bikes\n\nThe deposit is a hold, not a charge."
+    },
+    {
+     "pid": "P3",
+     "content": "# Payment methods\n\n## Accepted payment\n\nVelomarsh accepts Visa, Mastercard and American Express credit cards and debit cards. Apple Pay and Google Pay can be used in the app. Desks do not accept cash.\n\n## When customers are charged\n\nThe full rental price is charged at booking. Extension days are charged when the extension is approved. Late fees and damage charges are taken from the deposit or charged to the card on file."
+    },
+    {
+     "pid": "P4",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    },
+    {
+     "pid": "P5",
+     "content": "# Late returns\n## Overdue and unreturned bikes\n\nA bike that is more than 24 hours late without contact from the customer is marked overdue, and support tries to reach the customer. A bike that is more than 48 hours late without contact is reported as unreturned, and the full security deposit is kept.\n\n## Avoiding late fees\n\nExtending the rental before its scheduled end time avoids late fees entirely. See the extension policy."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-058",
+   "claim": "A request to delete your Velomarsh account and all associated data is processed and completed within 30 days of the request [P1].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Privacy and the support assistant\n## Account deletion\n\nA request to delete an account and all its data is completed within 30 days."
+    },
+    {
+     "pid": "P2",
+     "content": "# Privacy and the support assistant\n\n## Personal data in chat\n\nThe support assistant removes email addresses, phone numbers, card numbers, bank account numbers (IBANs) and street addresses from messages before any AI model sees them. Customers never need to share these details in chat."
+    },
+    {
+     "pid": "P3",
+     "content": "# Privacy and the support assistant\n## What the assistant remembers\n\nWith each conversation, the assistant may save a few short notes, such as preferred bike types or desks, and a summary of the conversation, so later conversations can pick up where they left off. These notes never contain contact or payment details.\n\n## Viewing and deleting memories\n\nCustomers can see every saved note in the memory panel and delete any of them at any time. Deleted notes are removed immediately."
+    },
+    {
+     "pid": "P4",
+     "content": "# Security deposits\n## Release of the deposit\n\nAfter the bike is returned and inspected, the hold is released within 3 business days for credit cards. Holds on debit cards can take up to 10 business days to disappear, depending on the customer's bank.\n\n## When the deposit is used\n\nThe deposit covers unpaid late fees, damage charges, cleaning fees and lost accessories. Any amount taken from the deposit is itemised in an email sent on the day of return inspection."
+    },
+    {
+     "pid": "P5",
+     "content": "# Damage and cleaning\n## Disputes\n\nA damage charge can be disputed within 14 days of the return by contacting support."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-011",
+   "claim": "Every rental includes a 30-minute grace period after the scheduled end time, and returning the bike within that window incurs no charge.",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Late returns\n\n## Grace period\n\nEvery rental has a 30-minute grace period after the scheduled end time. Returns within the grace period are not charged.\n\n## Late fees\n\nAfter the grace period, the late fee is $10 for each started hour. Late fees for any 24-hour period are capped at the bike's daily rate."
+    },
+    {
+     "pid": "P2",
+     "content": "# Late returns\n## Overdue and unreturned bikes\n\nA bike that is more than 24 hours late without contact from the customer is marked overdue, and support tries to reach the customer. A bike that is more than 48 hours late without contact is reported as unreturned, and the full security deposit is kept.\n\n## Avoiding late fees\n\nExtending the rental before its scheduled end time avoids late fees entirely. See the extension policy."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pickup and return\n\n## Desks and opening hours\n\nVelomarsh has three desks:\n\n- Harbour Desk: 8:00 to 20:00 every day\n- Central Station Desk: 8:00 to 20:00 every day\n- Riverside Park Desk: 9:00 to 18:00 every day\n\n## Returning to another desk\n\nBikes can be returned to any desk at no extra cost. One-way returns between desks are free."
+    },
+    {
+     "pid": "P4",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    },
+    {
+     "pid": "P5",
+     "content": "# Rental extensions\n## Price\n\nExtension days are charged at the bike's normal daily rate, and the Plus membership discount applies. The extra days are charged to the card on file when the extension is approved.\n\n## Confirmation\n\nAn extension is only confirmed after the customer approves it. The support assistant always shows the new end date and asks for approval before changing a rental. Extending before the scheduled end avoids late fees."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-042",
+   "claim": "Rain by itself is not considered \"severe weather\" under Velomarsh policy, so the standard cancellation rules apply.",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Weather\n\n## Severe weather\n\nSevere weather means an official storm warning or heat warning issued for the rental area. When severe weather covers the start of a rental, the customer can cancel for free or reschedule at any time before the start, even within 48 hours.\n\n## Rain\n\nRain alone is not severe weather. Normal cancellation fees apply for rain, and rain covers are available at all desks for free."
+    },
+    {
+     "pid": "P2",
+     "content": "# Cancellations\n## Severe weather\n\nWhen an official severe weather warning covers the rental start, cancellation is free at any time before the start. See the weather policy.\n\n## Confirmation\n\nThe support assistant asks the customer to approve every cancellation before it is made."
+    },
+    {
+     "pid": "P3",
+     "content": "# Weather\n## During a rental\n\nWhen a severe weather warning starts during an active rental, the customer can return the bike early and get a full refund of the unused days."
+    },
+    {
+     "pid": "P4",
+     "content": "# Refunds\n\n## Timing\n\nRefunds go back to the original payment method within 5 to 7 business days of approval.\n\n## Early returns\n\nWhen a customer returns a bike early, each unused full day is refunded at 50% of the daily rate. Partial days are not refunded. Hourly rentals are not refunded for early returns."
+    },
+    {
+     "pid": "P5",
+     "content": "# Cancellations\n## Cancellation fees\n\n- More than 48 hours before the start: free cancellation with a full refund.\n- Within 48 hours of the start: a fee of 50% of the first day's rate.\n- No-show without cancelling: the first day is charged in full and the rest is refunded.\n\nPlus members can cancel free of charge up to 24 hours before the start."
+    }
+   ]
+  },
+  {
+   "question_id": "pii-010",
+   "claim": "City e-bikes are limited to paved roads and bike paths; they are not permitted on unpaved mountain-bike trails.",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# E-bikes\n## Rules\n\nE-bike riders must be at least 18 and must wear a helmet. City e-bikes are for paved roads and bike paths only; they must not be ridden on unpaved trails."
+    },
+    {
+     "pid": "P2",
+     "content": "# Riding rules\n## Prohibited uses\n\nRiding under the influence of alcohol or drugs, racing, stunts, and modifying the bike are not allowed. City and hybrid bikes must not be used on unpaved mountain trails; mountain bikes are allowed on marked trails.\n\n## Breaking the rules\n\nDamage caused while breaking these rules is not covered by the damage waiver."
+    },
+    {
+     "pid": "P3",
+     "content": "# E-bikes\n\n## Performance\n\nCity e-bikes have pedal assist up to 25 km/h and a range of 60 to 80 km on a full battery, depending on terrain and assist level. Batteries are fully charged at pickup.\n\n## Charging and battery swaps\n\nA charger is included with e-bike rentals of 2 days or more. Customers can swap a low battery for a charged one at any desk for free. Returning a bike with an empty battery is not charged."
+    },
+    {
+     "pid": "P4",
+     "content": "# Age and identification\n\n## Minimum ages\n\n- Riders must be at least 16 to rent a bike on their own.\n- Riders must be at least 18 to rent an e-bike.\n- Riders under 16 can ride when a parent or guardian rents the bike and signs the rental agreement.\n- Kids bikes are sized for ages 5 to 12."
+    },
+    {
+     "pid": "P5",
+     "content": "# Riding rules\n\n## On the road\n\nRiders must follow local traffic laws, ride on roads and bike paths rather than sidewalks, and use the provided lights between dusk and dawn.\n\n## Loads\n\nCargo bikes carry up to 80 kg in the front box. Other bikes may carry up to 10 kg in the rear rack. Passengers are allowed only on tandems and in approved child seats or trailers."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-059",
+   "claim": "If a bike breaks down through no fault of the rider, Velomarsh will either give you a free replacement bike or a full refund for the remaining rental days, whichever you prefer[P2].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Breakdown assistance\n## Flat tyres\n\nEvery bike carries a puncture repair kit and a pump, and customers may fix a flat themselves. Flat tyres are never charged.\n\n## Outside the service area\n\nMore than 15 km from a desk, the customer brings the bike to the nearest desk, and Velomarsh refunds a taxi or rideshare fare up to $30 when the breakdown was a mechanical fault."
+    },
+    {
+     "pid": "P2",
+     "content": "# Refunds\n## Mechanical failure\n\nIf a bike breaks down through no fault of the rider, the customer gets a free replacement bike or a full refund of the remaining rental days, whichever they prefer.\n\n## Disputes\n\nCustomers can dispute a charge within 14 days of the rental end by contacting support. Disputes are answered within 5 business days."
+    },
+    {
+     "pid": "P3",
+     "content": "# Damage and cleaning\n## What is charged\n\nNormal wear, such as tyre wear, minor scratches and brake pad wear, is never charged. Other damage is charged at repair cost from the price list:\n\n- Bent wheel: $60\n- Broken derailleur: $85\n- Damaged e-bike display: $120\n- Damaged e-bike battery: up to $450\n- Frame damage: the bike's replacement value"
+    },
+    {
+     "pid": "P4",
+     "content": "# Breakdown assistance\n\n## Roadside hotline\n\nThe roadside assistance hotline is open from 7:00 to 21:00 every day. Plus members are served first.\n\n## Replacement bikes\n\nWithin 15 km of a desk, Velomarsh brings a replacement bike within 60 minutes. The replacement is free when the breakdown is caused by a mechanical fault. When the rider caused the damage, the damage policy applies."
+    },
+    {
+     "pid": "P5",
+     "content": "# Theft and loss\n## Liability\n\nWhen the bike was locked correctly and both reports were made in time, the customer's liability is limited to $150 for standard bikes and $400 for e-bikes, cargo bikes and tandems. Otherwise the customer is liable for the bike's full replacement value. The damage waiver does not cover theft.\n\n## Lost accessories\n\nA lost lock key costs $30 and a lost lock costs $40."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-021",
+   "claim": "If the warning begins after you've already started riding, you can return the bike early and receive a full refund for the unused days [P2].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Weather\n\n## Severe weather\n\nSevere weather means an official storm warning or heat warning issued for the rental area. When severe weather covers the start of a rental, the customer can cancel for free or reschedule at any time before the start, even within 48 hours.\n\n## Rain\n\nRain alone is not severe weather. Normal cancellation fees apply for rain, and rain covers are available at all desks for free."
+    },
+    {
+     "pid": "P2",
+     "content": "# Weather\n## During a rental\n\nWhen a severe weather warning starts during an active rental, the customer can return the bike early and get a full refund of the unused days."
+    },
+    {
+     "pid": "P3",
+     "content": "# Cancellations\n## Severe weather\n\nWhen an official severe weather warning covers the rental start, cancellation is free at any time before the start. See the weather policy.\n\n## Confirmation\n\nThe support assistant asks the customer to approve every cancellation before it is made."
+    },
+    {
+     "pid": "P4",
+     "content": "# Cancellations\n\n## Which rentals can be cancelled\n\nOnly booked rentals that have not started can be cancelled. An active rental cannot be cancelled; the customer can return the bike early instead, and the early return rules in the refund policy apply."
+    },
+    {
+     "pid": "P5",
+     "content": "# Riding rules\n## Prohibited uses\n\nRiding under the influence of alcohol or drugs, racing, stunts, and modifying the bike are not allowed. City and hybrid bikes must not be used on unpaved mountain trails; mountain bikes are allowed on marked trails.\n\n## Breaking the rules\n\nDamage caused while breaking these rules is not covered by the damage waiver."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-028",
+   "claim": "The policy states that returning a bike with an empty battery is not charged[P2].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Damage and cleaning\n## What is charged\n\nNormal wear, such as tyre wear, minor scratches and brake pad wear, is never charged. Other damage is charged at repair cost from the price list:\n\n- Bent wheel: $60\n- Broken derailleur: $85\n- Damaged e-bike display: $120\n- Damaged e-bike battery: up to $450\n- Frame damage: the bike's replacement value"
+    },
+    {
+     "pid": "P2",
+     "content": "# E-bikes\n\n## Performance\n\nCity e-bikes have pedal assist up to 25 km/h and a range of 60 to 80 km on a full battery, depending on terrain and assist level. Batteries are fully charged at pickup.\n\n## Charging and battery swaps\n\nA charger is included with e-bike rentals of 2 days or more. Customers can swap a low battery for a charged one at any desk for free. Returning a bike with an empty battery is not charged."
+    },
+    {
+     "pid": "P3",
+     "content": "# Late returns\n\n## Grace period\n\nEvery rental has a 30-minute grace period after the scheduled end time. Returns within the grace period are not charged.\n\n## Late fees\n\nAfter the grace period, the late fee is $10 for each started hour. Late fees for any 24-hour period are capped at the bike's daily rate."
+    },
+    {
+     "pid": "P4",
+     "content": "# Late returns\n## Overdue and unreturned bikes\n\nA bike that is more than 24 hours late without contact from the customer is marked overdue, and support tries to reach the customer. A bike that is more than 48 hours late without contact is reported as unreturned, and the full security deposit is kept.\n\n## Avoiding late fees\n\nExtending the rental before its scheduled end time avoids late fees entirely. See the extension policy."
+    },
+    {
+     "pid": "P5",
+     "content": "# Helmets\n## Lost or damaged helmets\n\nA helmet that is not returned is charged at $25. A helmet that was in a crash must be returned and replaced at no charge, because it can no longer protect a rider."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-030",
+   "claim": "Additionally, the e-bike rules reiterate that e-bike riders must be at least 18 and must wear a helmet[P3].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Helmets\n\n## Free with every rental\n\nEvery rental includes a free helmet. Adult sizes XS to XL and child sizes are available at all desks.\n\n## When a helmet is required\n\nRiders under 18 must wear a helmet. All e-bike riders must wear a helmet, whatever their age. Helmets are strongly recommended for everyone else.\n\n## Hygiene\n\nHelmets are cleaned and disinfected after every rental, and disposable liners are available on request."
+    },
+    {
+     "pid": "P2",
+     "content": "# Helmets\n## Lost or damaged helmets\n\nA helmet that is not returned is charged at $25. A helmet that was in a crash must be returned and replaced at no charge, because it can no longer protect a rider."
+    },
+    {
+     "pid": "P3",
+     "content": "# E-bikes\n## Rules\n\nE-bike riders must be at least 18 and must wear a helmet. City e-bikes are for paved roads and bike paths only; they must not be ridden on unpaved trails."
+    },
+    {
+     "pid": "P4",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    },
+    {
+     "pid": "P5",
+     "content": "# Age and identification\n\n## Minimum ages\n\n- Riders must be at least 16 to rent a bike on their own.\n- Riders must be at least 18 to rent an e-bike.\n- Riders under 16 can ride when a parent or guardian rents the bike and signs the rental agreement.\n- Kids bikes are sized for ages 5 to 12."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-034",
+   "claim": "Any extension fees are charged when the extension is approved, and late-fee or damage charges are taken from the deposit or charged to the card on file later [P1].",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Payment methods\n\n## Accepted payment\n\nVelomarsh accepts Visa, Mastercard and American Express credit cards and debit cards. Apple Pay and Google Pay can be used in the app. Desks do not accept cash.\n\n## When customers are charged\n\nThe full rental price is charged at booking. Extension days are charged when the extension is approved. Late fees and damage charges are taken from the deposit or charged to the card on file."
+    },
+    {
+     "pid": "P2",
+     "content": "# Security deposits\n\n## Deposit amounts\n\nA security deposit is held on the customer's card at pickup:\n\n- $100 for city, hybrid, road, mountain and kids bikes\n- $250 for city e-bikes and cargo bikes\n- $300 for tandem bikes\n\nThe deposit is a hold, not a charge."
+    },
+    {
+     "pid": "P3",
+     "content": "# Security deposits\n## Release of the deposit\n\nAfter the bike is returned and inspected, the hold is released within 3 business days for credit cards. Holds on debit cards can take up to 10 business days to disappear, depending on the customer's bank.\n\n## When the deposit is used\n\nThe deposit covers unpaid late fees, damage charges, cleaning fees and lost accessories. Any amount taken from the deposit is itemised in an email sent on the day of return inspection."
+    },
+    {
+     "pid": "P4",
+     "content": "# Pricing\n\nVelomarsh Bike Rental is a fictional bike-rental service. All prices are in US dollars and exclude 8% sales tax, which is added at checkout."
+    },
+    {
+     "pid": "P5",
+     "content": "# Refunds\n\n## Timing\n\nRefunds go back to the original payment method within 5 to 7 business days of approval.\n\n## Early returns\n\nWhen a customer returns a bike early, each unused full day is refunded at 50% of the daily rate. Partial days are not refunded. Hourly rentals are not refunded for early returns."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-048",
+   "claim": "The security deposit is a hold on your card that is used to cover any unpaid late-fees, damage charges, cleaning fees, or lost accessories when the bike is returned.",
+   "supported": true,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Security deposits\n## Release of the deposit\n\nAfter the bike is returned and inspected, the hold is released within 3 business days for credit cards. Holds on debit cards can take up to 10 business days to disappear, depending on the customer's bank.\n\n## When the deposit is used\n\nThe deposit covers unpaid late fees, damage charges, cleaning fees and lost accessories. Any amount taken from the deposit is itemised in an email sent on the day of return inspection."
+    },
+    {
+     "pid": "P2",
+     "content": "# Security deposits\n\n## Deposit amounts\n\nA security deposit is held on the customer's card at pickup:\n\n- $100 for city, hybrid, road, mountain and kids bikes\n- $250 for city e-bikes and cargo bikes\n- $300 for tandem bikes\n\nThe deposit is a hold, not a charge."
+    },
+    {
+     "pid": "P3",
+     "content": "# Damage and cleaning\n## Disputes\n\nA damage charge can be disputed within 14 days of the return by contacting support."
+    },
+    {
+     "pid": "P4",
+     "content": "# Late returns\n## Overdue and unreturned bikes\n\nA bike that is more than 24 hours late without contact from the customer is marked overdue, and support tries to reach the customer. A bike that is more than 48 hours late without contact is reported as unreturned, and the full security deposit is kept.\n\n## Avoiding late fees\n\nExtending the rental before its scheduled end time avoids late fees entirely. See the extension policy."
+    },
+    {
+     "pid": "P5",
+     "content": "# Damage and cleaning\n\n## Inspection at pickup\n\nCustomers should inspect the bike at pickup and report any existing damage within 15 minutes, at the desk or with photos in the app. Damage reported in that window is never charged to the customer."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-014",
+   "claim": "The Riverside Park Desk is open daily from 9:00 until 20:00.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Pickup and return\n\n## Desks and opening hours\n\nVelomarsh has three desks:\n\n- Harbour Desk: 8:00 to 20:00 every day\n- Central Station Desk: 8:00 to 20:00 every day\n- Riverside Park Desk: 9:00 to 18:00 every day\n\n## Returning to another desk\n\nBikes can be returned to any desk at no extra cost. One-way returns between desks are free."
+    },
+    {
+     "pid": "P2",
+     "content": "# Breakdown assistance\n\n## Roadside hotline\n\nThe roadside assistance hotline is open from 7:00 to 21:00 every day. Plus members are served first.\n\n## Replacement bikes\n\nWithin 15 km of a desk, Velomarsh brings a replacement bike within 60 minutes. The replacement is free when the breakdown is caused by a mechanical fault. When the rider caused the damage, the damage policy applies."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pickup and return\n## After-hours drop box\n\nCentral Station Desk has an after-hours drop box for bikes, open at all times. A drop-box return counts as returned at the time the bike is dropped, as recorded by the drop box camera. The bike is inspected the next morning, and the deposit release starts then."
+    },
+    {
+     "pid": "P4",
+     "content": "# Accessibility and adaptive bikes\n\n## Adaptive bikes\n\nVelomarsh offers hand cycles, adult tricycles, recumbent trikes and side-by-side tandems for riders with disabilities. Adaptive bikes should be reserved at least 72 hours in advance so a fitted bike is ready.\n\n## Price\n\nAdaptive bikes are charged at the city bike rate of $18 per day, whatever their type. A companion riding on a side-by-side tandem rides free."
+    },
+    {
+     "pid": "P5",
+     "content": "# Payment methods\n\n## Accepted payment\n\nVelomarsh accepts Visa, Mastercard and American Express credit cards and debit cards. Apple Pay and Google Pay can be used in the app. Desks do not accept cash.\n\n## When customers are charged\n\nThe full rental price is charged at booking. Extension days are charged when the extension is approved. Late fees and damage charges are taken from the deposit or charged to the card on file."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-011",
+   "claim": "After the grace period, the late fee is $15 for each started hour.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Late returns\n\n## Grace period\n\nEvery rental has a 30-minute grace period after the scheduled end time. Returns within the grace period are not charged.\n\n## Late fees\n\nAfter the grace period, the late fee is $10 for each started hour. Late fees for any 24-hour period are capped at the bike's daily rate."
+    },
+    {
+     "pid": "P2",
+     "content": "# Late returns\n## Overdue and unreturned bikes\n\nA bike that is more than 24 hours late without contact from the customer is marked overdue, and support tries to reach the customer. A bike that is more than 48 hours late without contact is reported as unreturned, and the full security deposit is kept.\n\n## Avoiding late fees\n\nExtending the rental before its scheduled end time avoids late fees entirely. See the extension policy."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pickup and return\n\n## Desks and opening hours\n\nVelomarsh has three desks:\n\n- Harbour Desk: 8:00 to 20:00 every day\n- Central Station Desk: 8:00 to 20:00 every day\n- Riverside Park Desk: 9:00 to 18:00 every day\n\n## Returning to another desk\n\nBikes can be returned to any desk at no extra cost. One-way returns between desks are free."
+    },
+    {
+     "pid": "P4",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    },
+    {
+     "pid": "P5",
+     "content": "# Rental extensions\n## Price\n\nExtension days are charged at the bike's normal daily rate, and the Plus membership discount applies. The extra days are charged to the card on file when the extension is approved.\n\n## Confirmation\n\nAn extension is only confirmed after the customer approves it. The support assistant always shows the new end date and asks for approval before changing a rental. Extending before the scheduled end avoids late fees."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-011",
+   "claim": "The grace period after the scheduled end time is 60 minutes.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Late returns\n\n## Grace period\n\nEvery rental has a 30-minute grace period after the scheduled end time. Returns within the grace period are not charged.\n\n## Late fees\n\nAfter the grace period, the late fee is $10 for each started hour. Late fees for any 24-hour period are capped at the bike's daily rate."
+    },
+    {
+     "pid": "P2",
+     "content": "# Late returns\n## Overdue and unreturned bikes\n\nA bike that is more than 24 hours late without contact from the customer is marked overdue, and support tries to reach the customer. A bike that is more than 48 hours late without contact is reported as unreturned, and the full security deposit is kept.\n\n## Avoiding late fees\n\nExtending the rental before its scheduled end time avoids late fees entirely. See the extension policy."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pickup and return\n\n## Desks and opening hours\n\nVelomarsh has three desks:\n\n- Harbour Desk: 8:00 to 20:00 every day\n- Central Station Desk: 8:00 to 20:00 every day\n- Riverside Park Desk: 9:00 to 18:00 every day\n\n## Returning to another desk\n\nBikes can be returned to any desk at no extra cost. One-way returns between desks are free."
+    },
+    {
+     "pid": "P4",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    },
+    {
+     "pid": "P5",
+     "content": "# Rental extensions\n## Price\n\nExtension days are charged at the bike's normal daily rate, and the Plus membership discount applies. The extra days are charged to the card on file when the extension is approved.\n\n## Confirmation\n\nAn extension is only confirmed after the customer approves it. The support assistant always shows the new end date and asks for approval before changing a rental. Extending before the scheduled end avoids late fees."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-036",
+   "claim": "Renting a city bike costs $25 per day.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Pricing\n## Daily rates\n\n| Bike | Price per day |\n|---|---|\n| City bike | $18 |\n| Hybrid bike | $24 |\n| Road bike | $28 |\n| City e-bike | $32 |\n| Mountain bike | $35 |\n| Cargo bike | $40 |\n| Tandem bike | $45 |\n| Kids bike | $12 |\n\nA rental day is 24 hours from the pickup time. Every rental includes a lock, a helmet and a front and rear light set at no extra cost."
+    },
+    {
+     "pid": "P2",
+     "content": "# Pricing\n## Hourly rentals\n\nCity bikes can be rented for $6 per hour and city e-bikes for $10 per hour, with a minimum of 2 hours. An hourly rental of 4 hours or more is charged as one full day. Other bike types are rented by the day only.\n\n## Multi-day discounts\n\nRentals of 7 days or more get 15% off the daily rate. Rentals of 14 days or more get 25% off. Discounts do not stack with each other, but they do stack with the Plus membership discount."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pricing\n\nVelomarsh Bike Rental is a fictional bike-rental service. All prices are in US dollars and exclude 8% sales tax, which is added at checkout."
+    },
+    {
+     "pid": "P4",
+     "content": "# Tandem bikes and group bookings\n\n## Tandem bikes\n\nA tandem bike costs $45 per day and needs a $300 deposit. The front rider (captain) must be at least 16. The rear rider (stoker) can be 10 or older when the captain is their parent or guardian."
+    },
+    {
+     "pid": "P5",
+     "content": "# Kids bikes, child seats and trailers\n\n## Kids bikes\n\nKids bikes cost $12 per day and fit children aged 5 to 12. Child helmets are free.\n\n## Child seats\n\nRear child seats fit children from 9 months to 4 years old who weigh up to 22 kg. A child seat costs $5 per day and can be fitted to city and hybrid bikes only."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-049",
+   "claim": "Riders must be at least 16 years old to rent an e-bike.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Age and identification\n\n## Minimum ages\n\n- Riders must be at least 16 to rent a bike on their own.\n- Riders must be at least 18 to rent an e-bike.\n- Riders under 16 can ride when a parent or guardian rents the bike and signs the rental agreement.\n- Kids bikes are sized for ages 5 to 12."
+    },
+    {
+     "pid": "P2",
+     "content": "# E-bikes\n## Rules\n\nE-bike riders must be at least 18 and must wear a helmet. City e-bikes are for paved roads and bike paths only; they must not be ridden on unpaved trails."
+    },
+    {
+     "pid": "P3",
+     "content": "# Age and identification\n## Identification\n\nThe person picking up the bike must show a government-issued photo ID. The name on the ID must match the name on the booking. A booking can be transferred to another adult at the desk if both people are present."
+    },
+    {
+     "pid": "P4",
+     "content": "# E-bikes\n\n## Performance\n\nCity e-bikes have pedal assist up to 25 km/h and a range of 60 to 80 km on a full battery, depending on terrain and assist level. Batteries are fully charged at pickup.\n\n## Charging and battery swaps\n\nA charger is included with e-bike rentals of 2 days or more. Customers can swap a low battery for a charged one at any desk for free. Returning a bike with an empty battery is not charged."
+    },
+    {
+     "pid": "P5",
+     "content": "# Tandem bikes and group bookings\n\n## Tandem bikes\n\nA tandem bike costs $45 per day and needs a $300 deposit. The front rider (captain) must be at least 16. The rear rider (stoker) can be 10 or older when the captain is their parent or guardian."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-058",
+   "claim": "A request to delete your account is completed within 7 days.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Privacy and the support assistant\n## Account deletion\n\nA request to delete an account and all its data is completed within 30 days."
+    },
+    {
+     "pid": "P2",
+     "content": "# Privacy and the support assistant\n\n## Personal data in chat\n\nThe support assistant removes email addresses, phone numbers, card numbers, bank account numbers (IBANs) and street addresses from messages before any AI model sees them. Customers never need to share these details in chat."
+    },
+    {
+     "pid": "P3",
+     "content": "# Privacy and the support assistant\n## What the assistant remembers\n\nWith each conversation, the assistant may save a few short notes, such as preferred bike types or desks, and a summary of the conversation, so later conversations can pick up where they left off. These notes never contain contact or payment details.\n\n## Viewing and deleting memories\n\nCustomers can see every saved note in the memory panel and delete any of them at any time. Deleted notes are removed immediately."
+    },
+    {
+     "pid": "P4",
+     "content": "# Security deposits\n## Release of the deposit\n\nAfter the bike is returned and inspected, the hold is released within 3 business days for credit cards. Holds on debit cards can take up to 10 business days to disappear, depending on the customer's bank.\n\n## When the deposit is used\n\nThe deposit covers unpaid late fees, damage charges, cleaning fees and lost accessories. Any amount taken from the deposit is itemised in an email sent on the day of return inspection."
+    },
+    {
+     "pid": "P5",
+     "content": "# Damage and cleaning\n## Disputes\n\nA damage charge can be disputed within 14 days of the return by contacting support."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-059",
+   "claim": "If a bike breaks down, Velomarsh refunds the whole rental including the days already ridden.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Breakdown assistance\n## Flat tyres\n\nEvery bike carries a puncture repair kit and a pump, and customers may fix a flat themselves. Flat tyres are never charged.\n\n## Outside the service area\n\nMore than 15 km from a desk, the customer brings the bike to the nearest desk, and Velomarsh refunds a taxi or rideshare fare up to $30 when the breakdown was a mechanical fault."
+    },
+    {
+     "pid": "P2",
+     "content": "# Refunds\n## Mechanical failure\n\nIf a bike breaks down through no fault of the rider, the customer gets a free replacement bike or a full refund of the remaining rental days, whichever they prefer.\n\n## Disputes\n\nCustomers can dispute a charge within 14 days of the rental end by contacting support. Disputes are answered within 5 business days."
+    },
+    {
+     "pid": "P3",
+     "content": "# Damage and cleaning\n## What is charged\n\nNormal wear, such as tyre wear, minor scratches and brake pad wear, is never charged. Other damage is charged at repair cost from the price list:\n\n- Bent wheel: $60\n- Broken derailleur: $85\n- Damaged e-bike display: $120\n- Damaged e-bike battery: up to $450\n- Frame damage: the bike's replacement value"
+    },
+    {
+     "pid": "P4",
+     "content": "# Breakdown assistance\n\n## Roadside hotline\n\nThe roadside assistance hotline is open from 7:00 to 21:00 every day. Plus members are served first.\n\n## Replacement bikes\n\nWithin 15 km of a desk, Velomarsh brings a replacement bike within 60 minutes. The replacement is free when the breakdown is caused by a mechanical fault. When the rider caused the damage, the damage policy applies."
+    },
+    {
+     "pid": "P5",
+     "content": "# Theft and loss\n## Liability\n\nWhen the bike was locked correctly and both reports were made in time, the customer's liability is limited to $150 for standard bikes and $400 for e-bikes, cargo bikes and tandems. Otherwise the customer is liable for the bike's full replacement value. The damage waiver does not cover theft.\n\n## Lost accessories\n\nA lost lock key costs $30 and a lost lock costs $40."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-039",
+   "claim": "Cargo bikes can carry up to 120 kg in the front box.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Riding rules\n\n## On the road\n\nRiders must follow local traffic laws, ride on roads and bike paths rather than sidewalks, and use the provided lights between dusk and dawn.\n\n## Loads\n\nCargo bikes carry up to 80 kg in the front box. Other bikes may carry up to 10 kg in the rear rack. Passengers are allowed only on tandems and in approved child seats or trailers."
+    },
+    {
+     "pid": "P2",
+     "content": "# Breakdown assistance\n\n## Roadside hotline\n\nThe roadside assistance hotline is open from 7:00 to 21:00 every day. Plus members are served first.\n\n## Replacement bikes\n\nWithin 15 km of a desk, Velomarsh brings a replacement bike within 60 minutes. The replacement is free when the breakdown is caused by a mechanical fault. When the rider caused the damage, the damage policy applies."
+    },
+    {
+     "pid": "P3",
+     "content": "# Pickup and return\n\n## Desks and opening hours\n\nVelomarsh has three desks:\n\n- Harbour Desk: 8:00 to 20:00 every day\n- Central Station Desk: 8:00 to 20:00 every day\n- Riverside Park Desk: 9:00 to 18:00 every day\n\n## Returning to another desk\n\nBikes can be returned to any desk at no extra cost. One-way returns between desks are free."
+    },
+    {
+     "pid": "P4",
+     "content": "# Breakdown assistance\n## Flat tyres\n\nEvery bike carries a puncture repair kit and a pump, and customers may fix a flat themselves. Flat tyres are never charged.\n\n## Outside the service area\n\nMore than 15 km from a desk, the customer brings the bike to the nearest desk, and Velomarsh refunds a taxi or rideshare fare up to $30 when the breakdown was a mechanical fault."
+    },
+    {
+     "pid": "P5",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-027",
+   "claim": "Deposit holds on credit cards are released within 10 business days.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Security deposits\n## Release of the deposit\n\nAfter the bike is returned and inspected, the hold is released within 3 business days for credit cards. Holds on debit cards can take up to 10 business days to disappear, depending on the customer's bank.\n\n## When the deposit is used\n\nThe deposit covers unpaid late fees, damage charges, cleaning fees and lost accessories. Any amount taken from the deposit is itemised in an email sent on the day of return inspection."
+    },
+    {
+     "pid": "P2",
+     "content": "# Security deposits\n\n## Deposit amounts\n\nA security deposit is held on the customer's card at pickup:\n\n- $100 for city, hybrid, road, mountain and kids bikes\n- $250 for city e-bikes and cargo bikes\n- $300 for tandem bikes\n\nThe deposit is a hold, not a charge."
+    },
+    {
+     "pid": "P3",
+     "content": "# Payment methods\n\n## Accepted payment\n\nVelomarsh accepts Visa, Mastercard and American Express credit cards and debit cards. Apple Pay and Google Pay can be used in the app. Desks do not accept cash.\n\n## When customers are charged\n\nThe full rental price is charged at booking. Extension days are charged when the extension is approved. Late fees and damage charges are taken from the deposit or charged to the card on file."
+    },
+    {
+     "pid": "P4",
+     "content": "# Theft and loss\n\n## Locking\n\nWhenever a bike is left unattended, it must be locked to a fixed object with the lock provided.\n\n## Reporting a theft\n\nA stolen bike must be reported to Velomarsh within 24 hours, and the customer must file a police report within 48 hours."
+    },
+    {
+     "pid": "P5",
+     "content": "# Late returns\n## Overdue and unreturned bikes\n\nA bike that is more than 24 hours late without contact from the customer is marked overdue, and support tries to reach the customer. A bike that is more than 48 hours late without contact is reported as unreturned, and the full security deposit is kept.\n\n## Avoiding late fees\n\nExtending the rental before its scheduled end time avoids late fees entirely. See the extension policy."
+    }
+   ]
+  },
+  {
+   "question_id": "ans-042",
+   "claim": "Rain counts as severe weather, so cancellation is free.",
+   "supported": false,
+   "evidence": [
+    {
+     "pid": "P1",
+     "content": "# Weather\n\n## Severe weather\n\nSevere weather means an official storm warning or heat warning issued for the rental area. When severe weather covers the start of a rental, the customer can cancel for free or reschedule at any time before the start, even within 48 hours.\n\n## Rain\n\nRain alone is not severe weather. Normal cancellation fees apply for rain, and rain covers are available at all desks for free."
+    },
+    {
+     "pid": "P2",
+     "content": "# Cancellations\n## Severe weather\n\nWhen an official severe weather warning covers the rental start, cancellation is free at any time before the start. See the weather policy.\n\n## Confirmation\n\nThe support assistant asks the customer to approve every cancellation before it is made."
+    },
+    {
+     "pid": "P3",
+     "content": "# Weather\n## During a rental\n\nWhen a severe weather warning starts during an active rental, the customer can return the bike early and get a full refund of the unused days."
+    },
+    {
+     "pid": "P4",
+     "content": "# Refunds\n\n## Timing\n\nRefunds go back to the original payment method within 5 to 7 business days of approval.\n\n## Early returns\n\nWhen a customer returns a bike early, each unused full day is refunded at 50% of the daily rate. Partial days are not refunded. Hourly rentals are not refunded for early returns."
+    },
+    {
+     "pid": "P5",
+     "content": "# Cancellations\n## Cancellation fees\n\n- More than 48 hours before the start: free cancellation with a full refund.\n- Within 48 hours of the start: a fee of 50% of the first day's rate.\n- No-show without cancelling: the first day is charged in full and the rest is refunded.\n\nPlus members can cancel free of charge up to 24 hours before the start."
+    }
+   ]
+  }
+ ]
+}

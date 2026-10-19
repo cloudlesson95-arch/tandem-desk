@@ -18,6 +18,9 @@ except ImportError:
 AGENT_MODEL = os.getenv("AGENT_MODEL", "openai/gpt-oss-120b")
 GUARD_MODEL = os.getenv("GUARD_MODEL", "openai/gpt-oss-20b")
 INJECTION_MODEL = os.getenv("INJECTION_MODEL", "meta-llama/llama-prompt-guard-2-86m")
+# Used by the agents while AGENT_MODEL's daily quota is spent (see agent/llm.py).
+FALLBACK_MODEL = os.getenv("FALLBACK_MODEL", "openai/gpt-oss-20b")
+MODEL_FALLBACK = os.getenv("MODEL_FALLBACK", "on") != "off"
 EMBED_MODEL = "models/gemini-embedding-001"
 EMBED_DIM = 768
 
